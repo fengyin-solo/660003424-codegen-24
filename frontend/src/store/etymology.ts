@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { COGNATE_SETS, LANGUAGE_FAMILIES, buildGraph } from '../mock/data'
+import { buildResearchSummary } from '../utils/summary'
 export { LANGUAGE_FAMILIES, COGNATE_SETS }
 
 export const useEtymologyStore = defineStore('etymology', () => {
@@ -18,5 +19,8 @@ export const useEtymologyStore = defineStore('etymology', () => {
     })
   )
 
-  return { graph, selectedNode, searchQuery, selectedFamily, filteredCognates }
+  /** 由当前筛选结果自动生成的研究摘要（演化结论 + 关键样本） */
+  const researchSummary = computed(() => buildResearchSummary(filteredCognates.value))
+
+  return { graph, selectedNode, searchQuery, selectedFamily, filteredCognates, researchSummary }
 })

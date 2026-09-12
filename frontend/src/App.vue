@@ -42,8 +42,12 @@
           </div>
         </div>
       </div>
+      <ResearchSummaryPanel />
       <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
-        <h3 class="text-sm font-bold text-slate-400 mb-3">同源词对照表</h3>
+        <h3 class="text-sm font-bold text-slate-400 mb-3">
+          同源词对照表
+          <span class="ml-2 text-xs text-slate-500">（{{ store.filteredCognates.length }} 组，与上方摘要同步）</span>
+        </h3>
         <div class="flex gap-2 mb-3">
           <input v-model="store.searchQuery" placeholder="搜索词根/含义..." class="flex-1 bg-slate-900 border border-slate-600 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-cyan-500" />
           <select v-model="store.selectedFamily" class="bg-slate-900 border border-slate-600 rounded px-2 text-sm text-slate-300">
@@ -88,6 +92,7 @@
 import { ref, onMounted } from 'vue'
 import * as d3 from 'd3'
 import { useEtymologyStore, LANGUAGE_FAMILIES } from './store/etymology'
+import ResearchSummaryPanel from './components/ResearchSummaryPanel.vue'
 
 const store = useEtymologyStore()
 const svgRef = ref<SVGSVGElement | null>(null)
